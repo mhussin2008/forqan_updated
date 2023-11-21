@@ -91,7 +91,7 @@ class _SurahPageState extends State<SurahPage> {
                     WidgetSpan(
                       child: WidgetSpanWrapper(
                         key: nextKey(),
-                        child: TestWidgetSpan(color: Colors.red, order: i),
+                        child: NewWidgetSpan(color: Colors.red, order: i),
                       ),
                     ),
 
