@@ -9,6 +9,7 @@ class NewWidgetSpan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
+      backgroundColor: color,
         radius: 14,
         child: Text(
           '$order',
