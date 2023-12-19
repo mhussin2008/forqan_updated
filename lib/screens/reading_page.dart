@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:forqan_app/models/surah.dart';
@@ -30,12 +31,14 @@ class _SurahPageState extends State<SurahPage> {
     int index = widget.surah.id;
 
 
+
     final keys = <GlobalKey<WidgetSpanWrapperState>>[];
-    var nextKey = () {
-      var key = GlobalKey<WidgetSpanWrapperState>();
+
+    GlobalKey<WidgetSpanWrapperState> nextKey() {
+      GlobalKey<WidgetSpanWrapperState> key = GlobalKey<WidgetSpanWrapperState>();
       keys.add(key);
       return key;
-    };
+    }
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       List<GlobalKey<WidgetSpanWrapperState>>? sameRow;
       GlobalKey<WidgetSpanWrapperState> prev = keys.removeAt(0);
@@ -57,12 +60,12 @@ class _SurahPageState extends State<SurahPage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(leading: ElevatedButton(
+        appBar:    AppBar(leading: ElevatedButton(
           onPressed: (){
             setState(() {
             });
           },
-          child: Text('refresh'),
+          child: const Text('refresh'),
         ),),
         body: SafeArea(
           minimum: const EdgeInsets.all(15),
@@ -78,8 +81,12 @@ class _SurahPageState extends State<SurahPage> {
               textAlign: count <= 20 ? TextAlign.center : TextAlign.justify,
               text: TextSpan(
                 children: [
-                  for (var i = 1; i <= count; i++) ...{
+                  for (var i = 1; i <= count; i++)...{
+
                     TextSpan(
+                      recognizer: TapGestureRecognizer()..onTap = () {
+                        print('surah : ${widget.surah.id} $i tapped');
+                      },
                       text: ' ${quran.getVerse(index, i, verseEndSymbol: false)} ',
                       style: const TextStyle(
                         fontFamily: 'Kitab',

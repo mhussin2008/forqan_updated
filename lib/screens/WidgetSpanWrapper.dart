@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 class WidgetSpanWrapper extends StatefulWidget {
-  const WidgetSpanWrapper({Key? key, required this.child}) : super(key: key);
+  // const WidgetSpanWrapper({Key? key, required this.child}) : super(key: key);
+  const WidgetSpanWrapper({super.key, required this.child});
 
   final Widget child;
 
@@ -15,7 +16,7 @@ class WidgetSpanWrapperState extends State<WidgetSpanWrapper> {
 
   void updateXOffset(double xOffset) {
     setState(() {
-      this.offset = Offset(xOffset, 0);
+      offset = Offset(xOffset, 0);
     });
   }
 
