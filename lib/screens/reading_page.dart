@@ -96,9 +96,14 @@ class _SurahPageState extends State<SurahPage> {
                     ),
 
                     WidgetSpan(
-                      child: WidgetSpanWrapper(
-                        key: nextKey(),
-                        child: NewWidgetSpan(color: Colors.lightGreen, order: i),
+                      child: GestureDetector(
+                        onTap: (){
+                          print('surah : ${widget.surah.id} $i tapped');
+                        },
+                        child: WidgetSpanWrapper(
+                          key: nextKey(),
+                          child: NewWidgetSpan(color: Colors.lightGreen, order: i),
+                        ),
                       ),
                     ),
 
