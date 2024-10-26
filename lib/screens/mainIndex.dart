@@ -33,12 +33,16 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/surah.json');
     final data = await json.decode(response);
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 10));
     for (var item in data["chapters"]) {
       surahList.add(Surah.fromMap(item));
     }
+
+
     debugPrint(surahList.length.toString());
     setState(() {});
+
+
   }
 
   @override
@@ -46,8 +50,12 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
     return Scaffold(
 
       appBar: AppBar(
-        leading: Transform.rotate(
-          angle: isReverse ? pi : 2 * pi,
+        title: surahList.isNotEmpty?
+        const Center(child: Text ('إهداء من الأستاذ فيصل', style: TextStyle(color:  Colors.blue,)))
+            :
+            const SizedBox(width: 40,)
+        //leading: Transform.rotate(
+         // angle: isReverse ? pi : 2 * pi,
           // child: IconButton(
           //     icon: const Icon(Icons.sort),
           //     onPressed: () {
@@ -55,7 +63,9 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
           //         isReverse = !isReverse;
           //       });
           //     }),
-        ),
+       // ),
+
+
       ),
       body: surahList.isEmpty
           ?  Center(child: CircularProgressIndicatorModified())
@@ -92,6 +102,6 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
   }
 
  Widget CircularProgressIndicatorModified() {
-    return Image.asset('assets/logo_lockup_flutter_vertical.png');
+    return Image.asset('assets/splash.jpg');
   }
 }

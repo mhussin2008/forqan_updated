@@ -73,6 +73,7 @@ flutter:
     - assets/surah.json
     - assets/fonts/
     - assets/logo_lockup_flutter_vertical.png
+    - assets/splash.jpg
 
 
   fonts:
