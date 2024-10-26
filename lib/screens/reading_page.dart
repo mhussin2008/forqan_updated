@@ -60,13 +60,15 @@ class _SurahPageState extends State<SurahPage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar:    AppBar(leading: ElevatedButton(
-          onPressed: (){
-            setState(() {
-            });
-          },
-          child: const Text('refresh'),
-        ),),
+        appBar:    AppBar(
+        //   leading: ElevatedButton(
+        //   onPressed: (){
+        //     setState(() {
+        //     });
+        //   },
+        //   child: const Text('refresh'),
+        // ),
+        ),
         body: SafeArea(
           minimum: const EdgeInsets.all(15),
           child: ListView(children: [
@@ -131,7 +133,7 @@ class _SurahPageState extends State<SurahPage> {
           ),
         ),
         Text(
-          ' ${quran.getBasmala()} ',
+          ' ${quran.basmala} ',
           textDirection: TextDirection.rtl,
           style: const TextStyle(
             fontFamily: 'NotoNastaliqUrdu',

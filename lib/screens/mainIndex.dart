@@ -14,6 +14,8 @@ class MainIndex extends StatefulWidget {
   _MainIndexState createState() => _MainIndexState();
 }
 
+
+
 class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
   List<Surah> surahList = [];
   int selectedIndex = 0;
@@ -21,13 +23,17 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
   final ScrollController _controller = ScrollController();
   @override
   void initState() {
+
     readJson();
+
     super.initState();
   }
+
 
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/surah.json');
     final data = await json.decode(response);
+    await Future.delayed(Duration(seconds: 5));
     for (var item in data["chapters"]) {
       surahList.add(Surah.fromMap(item));
     }
@@ -38,20 +44,21 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         leading: Transform.rotate(
           angle: isReverse ? pi : 2 * pi,
-          child: IconButton(
-              icon: const Icon(Icons.sort),
-              onPressed: () {
-                setState(() {
-                  isReverse = !isReverse;
-                });
-              }),
+          // child: IconButton(
+          //     icon: const Icon(Icons.sort),
+          //     onPressed: () {
+          //       setState(() {
+          //         isReverse = !isReverse;
+          //       });
+          //     }),
         ),
       ),
       body: surahList.isEmpty
-          ? const Center(child: CircularProgressIndicator())
+          ?  Center(child: CircularProgressIndicatorModified())
           : chaptersList(isReverse ? surahList.reversed.toList() : surahList),
     );
   }
@@ -82,5 +89,9 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
       separatorBuilder: (context, index) => const Divider(height: 1),
       itemCount: chapters.length,
     );
+  }
+
+ Widget CircularProgressIndicatorModified() {
+    return Image.asset('assets/logo_lockup_flutter_vertical.png');
   }
 }
