@@ -91,8 +91,8 @@ class _SurahPageState extends State<SurahPage> {
                       },
                       text: ' ${quran.getVerse(index, i, verseEndSymbol: false)} ',
                       style: const TextStyle(
-                        fontFamily: 'Kitab',
-                        fontSize: 25,
+                        fontFamily: 'othmani',
+                        fontSize: 24,
                         color: Colors.black87,
                       ),
                     ),

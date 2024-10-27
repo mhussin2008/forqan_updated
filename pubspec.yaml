@@ -86,6 +86,9 @@ flutter:
     - family: Kitab
       fonts:
         - asset: assets/fonts/kitab.ttf
+    - family: othmani
+      fonts:
+        - asset: assets/fonts/Othmani_Regular.ttf
     #       - asset: fonts/TrajanPro_Bold.ttf
     #         weight: 700
     - family: Aldhabi
