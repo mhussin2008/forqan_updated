@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'dart:math';
+//import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forqan_app/models/surah.dart';
 import 'package:forqan_app/screens/reading_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 class MainIndex extends StatefulWidget {
@@ -16,7 +17,7 @@ class MainIndex extends StatefulWidget {
 
 
 
-class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
+class _MainIndexState extends State<MainIndex>  {
   List<Surah> surahList = [];
   int selectedIndex = 0;
   bool isReverse = false;
@@ -33,7 +34,7 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/surah.json');
     final data = await json.decode(response);
-    await Future.delayed(const Duration(seconds: 10));
+    //await Future.delayed(const Duration(seconds: 10));
     for (var item in data["chapters"]) {
       surahList.add(Surah.fromMap(item));
     }
@@ -53,7 +54,23 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
         title: surahList.isNotEmpty?
         const Center(child: Text ('إهداء من الأستاذ فيصل', style: TextStyle(color:  Colors.blue,)))
             :
-            const SizedBox(width: 40,)
+            const SizedBox(width: 40,),
+        actions: [
+          IconButton(onPressed: () async {
+
+            //Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => const SongScreen(song: song),
+            //   ),
+            // );;
+            await _launchPrivacyUrl();
+          }
+          ,tooltip: "Privacy Policy",
+              icon: Icon(Icons.privacy_tip)
+          )
+
+
+        ],
         //leading: Transform.rotate(
          // angle: isReverse ? pi : 2 * pi,
           // child: IconButton(
@@ -104,4 +121,16 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
  Widget CircularProgressIndicatorModified() {
     return Image.asset('assets/splash.jpg');
   }
+
+
+  Future<void> _launchPrivacyUrl() async {
+    Uri myPrivacyUri=Uri.parse("https://www.freeprivacypolicy.com/live/bc32b9fb-cc58-4ac5-92fd-9557e03da4b6");
+    //Uri myPrivacyUri=Uri.parse("www.google.com");
+    print('Privacy Policy');
+    if (!await launchUrl(myPrivacyUri)) {
+      throw Exception('Could not launch $myPrivacyUri');
+    }
+
+  }
+
 }
