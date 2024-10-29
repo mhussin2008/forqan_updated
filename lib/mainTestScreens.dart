@@ -7,8 +7,15 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
-     const MyApp(),
-   );
+    DevicePreview(
+      enabled: true,
+      tools: const [
+        ...DevicePreview.defaultTools,
+        CustomPlugin(),
+      ],
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

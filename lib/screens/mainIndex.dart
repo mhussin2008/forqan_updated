@@ -32,7 +32,7 @@ class _MainIndexState extends State<MainIndex>  {
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/surah.json');
     final data = await json.decode(response);
-    //await Future.delayed(const Duration(seconds: 10));
+    await Future.delayed(const Duration(seconds: 5));
     for (var item in data["chapters"]) {
       surahList.add(Surah.fromMap(item));
     }
@@ -46,9 +46,13 @@ class _MainIndexState extends State<MainIndex>  {
 
   @override
   Widget build(BuildContext context) {
+    final padding=MediaQuery
+      .of(context).viewPadding;
+    print(padding);
     return Scaffold(
 
       appBar: AppBar(
+        backgroundColor: Colors.greenAccent,
         title: surahList.isNotEmpty?
         const Center(child: Text ('إهداء من الأستاذ فيصل', style: TextStyle(color:  Colors.blue,)))
             :
@@ -64,7 +68,9 @@ class _MainIndexState extends State<MainIndex>  {
           ),
       body: surahList.isEmpty
           ?  Center(child: CircularProgressIndicatorModified())
-          : chaptersList(isReverse ? surahList.reversed.toList() : surahList),
+          :
+
+      chaptersList(isReverse ? surahList.reversed.toList() : surahList),
     );
   }
 
