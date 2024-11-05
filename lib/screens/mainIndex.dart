@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:forqan_app/models/surah.dart';
 import 'package:forqan_app/screens/reading_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../generated/assets.dart';
 //import 'package:google_fonts/google_fonts.dart';
 
 class MainIndex extends StatefulWidget {
@@ -14,13 +16,14 @@ class MainIndex extends StatefulWidget {
   _MainIndexState createState() => _MainIndexState();
 }
 
-class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
+class _MainIndexState extends State<MainIndex> {
   List<Surah> surahList = [];
   int selectedIndex = 0;
   bool isReverse = false;
   final ScrollController _controller = ScrollController();
   @override
   void initState() {
+
     readJson();
     super.initState();
   }
@@ -51,7 +54,7 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
         ),
       ),
       body: surahList.isEmpty
-          ? const Center(child: CircularProgressIndicator())
+          ?  Center(child: CircularProgressIndicator())
           : chaptersList(isReverse ? surahList.reversed.toList() : surahList),
     );
   }
@@ -83,4 +86,6 @@ class _MainIndexState extends State<MainIndex> with TickerProviderStateMixin {
       itemCount: chapters.length,
     );
   }
+
+
 }
