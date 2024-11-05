@@ -131,7 +131,7 @@ class _SurahPageState extends State<SurahPage> {
           ),
         ),
         Text(
-          ' ${quran.getBasmala()} ',
+          ' ${quran.basmala} ',
           textDirection: TextDirection.rtl,
           style: const TextStyle(
             fontFamily: 'NotoNastaliqUrdu',
